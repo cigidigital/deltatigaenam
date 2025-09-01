@@ -3,25 +3,25 @@ name: Deploy Vite App to cPanel via FTP
 on:
   push:
     branches:
-      - main
-  workflow_dispatch:
+      - main   # atau branch lain tempat kamu push
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - name: Checkout Repository
+        uses: actions/checkout@v3
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: 18
 
-      - name: Install dependencies
+      - name: Install Dependencies
         run: npm install
 
-      - name: Build Vite app
+      - name: Build Project
         run: npm run build
 
       - name: Deploy via FTP to cPanel
@@ -30,7 +30,9 @@ jobs:
           server: ${{ secrets.CPANEL_HOST }}
           username: ${{ secrets.CPANEL_USER }}
           password: ${{ secrets.CPANEL_PASSWORD }}
-          protocol: ftp       # ✅ gunakan plain FTP sesuai config
+          protocol: ftp
           port: 21
           local-dir: dist/
-          server-dir: ./
+          server-dir: public_html/   # atau ./ jika login FTP sudah langsung di public_html
+          dangerous-clean-slate: true
+          log-level: verbose
