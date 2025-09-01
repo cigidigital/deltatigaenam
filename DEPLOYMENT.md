@@ -107,7 +107,26 @@ Click "Create" to clone your repository. This may take a few minutes.
 
 After the initial clone, you have several options:
 
-#### Option A: Use the Deploy Script (Recommended)
+#### Option A: Pre-built Assets (Recommended if dist is committed)
+
+**If you've committed the `dist` folder to Git:**
+
+1. **Clone automatically includes built files** - no build needed!
+2. **Just copy the built files** to the web directory:
+    ```bash
+    cd public_html
+    cp -r dist/* .
+    rm -rf dist
+    ```
+
+**Benefits:**
+
+-   ✅ **No build time** in cPanel (much faster)
+-   ✅ **No dependency installation** needed
+-   ✅ **Consistent builds** across environments
+-   ✅ **Works on shared hosting** with limited resources
+
+#### Option B: Use the Deploy Script
 
 1. **Make the script executable**:
 
@@ -127,7 +146,7 @@ After the initial clone, you have several options:
     - Copy .htaccess and public assets
     - Prepare everything for deployment
 
-#### Option B: Manual Build
+#### Option C: Manual Build
 
 1. **Access Terminal** (if available in cPanel)
 2. Navigate to your repository directory:
@@ -150,43 +169,88 @@ After the initial clone, you have several options:
     rm -rf dist
     ```
 
-#### Option C: Automatic Deployment
+#### Option D: Automatic Deployment
 
-If you enabled automatic deployment, cPanel will pull updates when you push to your repository. However, you'll still need to build the application.
+If you enabled automatic deployment, cPanel will pull updates when you push to your repository. However, you'll still need to handle the built files.
 
 ### 6. **Set up Auto-Deploy Hook (Optional)**
 
-For automatic builds after each push:
+For automatic deployments after each push:
 
 1. Create a webhook in your Git repository
 2. Point it to: `https://yourdomain.com/deploy.php`
 3. Create `deploy.php` in your cPanel:
 
+**If dist is committed to Git:**
+
 ```php
 <?php
-// deploy.php
-$output = shell_exec('cd /home/username/public_html && npm install && npm run build:cpanel && cp -r dist/* . && rm -rf dist 2>&1');
+// deploy.php - for pre-built assets
+$output = shell_exec('cd /home/username/public_html && git pull && cp -r dist/* . && rm -rf dist 2>&1');
+file_put_contents('deploy.log', date('Y-m-d H:i:s') . ': ' . $output . "\n", FILE_APPEND);
+?>
+```
+
+**If building in cPanel:**
+
+```php
+<?php
+// deploy.php - for building in cPanel
+$output = shell_exec('cd /home/username/public_html && git pull && npm install && npm run build:cpanel && cp -r dist/* . && rm -rf dist 2>&1');
 file_put_contents('deploy.log', date('Y-m-d H:i:s') . ': ' . $output . "\n", FILE_APPEND);
 ?>
 ```
 
 ## 🔄 Updating Your App
 
-### Method 1: Push and Pull
+### Method 1: Pre-built Assets (Recommended if dist is committed)
+
+1. **Build locally**:
+
+    ```bash
+    npm run build:cpanel
+    # or if using bun
+    bun run build:cpanel
+    ```
+
+2. **Commit and push** the `dist` folder:
+
+    ```bash
+    git add dist/
+    git commit -m "Update built assets"
+    git push origin main
+    ```
+
+3. **In cPanel**: Click "Pull or Deploy" to get the latest changes
+4. **Copy built files**:
+    ```bash
+    cd public_html
+    cp -r dist/* .
+    rm -rf dist
+    ```
+
+**Benefits:**
+
+-   ✅ **Fast deployment** - no build time in cPanel
+-   ✅ **Consistent builds** - same environment as development
+-   ✅ **No dependency issues** - works on any hosting
+-   ✅ **Easy rollback** - just pull previous commit
+
+### Method 2: Push and Pull with Build
 
 1. Make changes locally
 2. Push to your Git repository
 3. In cPanel, click "Pull or Deploy" to get the latest changes
 4. Rebuild the application using one of the methods above
 
-### Method 2: Use Deploy Script
+### Method 3: Use Deploy Script
 
 1. Make changes locally
 2. Push to your Git repository
 3. In cPanel, pull the latest changes
 4. Run `./deploy.sh` to rebuild and deploy
 
-### Method 3: Direct Upload
+### Method 4: Direct Upload
 
 1. Build locally: `npm run build:cpanel`
 2. Upload the contents of the `dist` folder to your cPanel public_html directory
@@ -248,6 +312,10 @@ chmod 600 ~/.ssh/config
 5. **SSH Key Security**: Keep your private key secure and never share it
 6. **SSH Config**: Essential for cPanel Git to work with deploy keys
 7. **Script Permissions**: Always make deployment scripts executable with `chmod +x`
+8. **Dist Folder Strategy**:
+    - **Option A**: Commit `dist` folder to Git for fast deployment (no build in cPanel)
+    - **Option B**: Keep `dist` in `.gitignore` and build in cPanel (more control)
+9. **Pre-built Assets**: If committing `dist`, ensure all public assets are included in the build
 
 ## 🐛 Troubleshooting
 

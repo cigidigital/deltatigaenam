@@ -6,8 +6,22 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule . /index.html [L]
 
-# Fix MIME types for proper asset serving
+# Force correct MIME types (more aggressive approach)
 <IfModule mod_mime.c>
+    RemoveType .js
+    RemoveType .css
+    RemoveType .svg
+    RemoveType .png
+    RemoveType .jpg
+    RemoveType .jpeg
+    RemoveType .gif
+    RemoveType .webp
+    RemoveType .woff
+    RemoveType .woff2
+    RemoveType .ttf
+    RemoveType .otf
+    RemoveType .json
+    
     AddType application/javascript .js
     AddType text/css .css
     AddType image/svg+xml .svg
@@ -21,6 +35,54 @@ RewriteRule . /index.html [L]
     AddType font/ttf .ttf
     AddType font/otf .otf
     AddType application/json .json
+</IfModule>
+
+# Alternative: Force MIME types using mod_rewrite
+<IfModule mod_rewrite.c>
+    RewriteCond %{REQUEST_URI} \.js$
+    RewriteRule .* - [T=application/javascript]
+    
+    RewriteCond %{REQUEST_URI} \.css$
+    RewriteRule .* - [T=text/css]
+    
+    RewriteCond %{REQUEST_URI} \.svg$
+    RewriteRule .* - [T=image/svg+xml]
+    
+    RewriteCond %{REQUEST_URI} \.png$
+    RewriteRule .* - [T=image/png]
+    
+    RewriteCond %{REQUEST_URI} \.jpg$
+    RewriteRule .* - [T=image/jpeg]
+    
+    RewriteCond %{REQUEST_URI} \.gif$
+    RewriteRule .* - [T=image/gif]
+</IfModule>
+
+# Force MIME types using headers (fallback)
+<IfModule mod_headers.c>
+    <FilesMatch "\.js$">
+        Header set Content-Type "application/javascript"
+    </FilesMatch>
+    
+    <FilesMatch "\.css$">
+        Header set Content-Type "text/css"
+    </FilesMatch>
+    
+    <FilesMatch "\.svg$">
+        Header set Content-Type "image/svg+xml"
+    </FilesMatch>
+    
+    <FilesMatch "\.png$">
+        Header set Content-Type "image/png"
+    </FilesMatch>
+    
+    <FilesMatch "\.jpg$">
+        Header set Content-Type "image/jpeg"
+    </FilesMatch>
+    
+    <FilesMatch "\.gif$">
+        Header set Content-Type "image/gif"
+    </FilesMatch>
 </IfModule>
 
 # Enable compression
@@ -45,10 +107,10 @@ RewriteRule . /index.html [L]
     ExpiresByType image/png "access plus 1 year"
     ExpiresByType image/jpg "access plus 1 year"
     ExpiresByType image/jpeg "access plus 1 year"
-    AddOutputFilterByType DEFLATE image/gif "access plus 1 year"
-    AddOutputFilterByType DEFLATE image/svg+xml "access plus 1 year"
-    AddOutputFilterByType DEFLATE font/woff "access plus 1 year"
-    AddOutputFilterByType DEFLATE font/woff2 "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType font/woff "access plus 1 year"
+    ExpiresByType font/woff2 "access plus 1 year"
 </IfModule>
 
 # Security headers
