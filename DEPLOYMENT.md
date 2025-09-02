@@ -178,6 +178,9 @@ file_put_contents('deploy.log', date('Y-m-d H:i:s') . ': ' . $output . "\n", FIL
 -   ✅ **Easy rollback** - just pull previous commit
 -   ✅ **Automatic cleanup** - removes source code from web directory
 -   ✅ **Backup creation** - saves previous versions automatically
+-   ✅ **Self-preserving script** - deploy-cpanel.sh remains after execution
+-   ✅ **Automatic conflict resolution** - handles local changes with git stash
+-   ✅ **Proper file copying** - correctly copies all files including hidden ones
 
 ### Alternative: Direct Upload
 
@@ -264,6 +267,14 @@ chmod 600 ~/.ssh/config
 -   **"Command not found"**: Ensure you're in the correct directory
 -   **"No such file"**: Check if the script exists in current directory
 -   **"dist folder not found"**: Make sure you've built and committed the dist folder to Git
+
+### Local Changes Conflict
+
+-   **"Your local changes to the following files would be overwritten"**: The deployment script now automatically stashes local changes before pulling updates and reapplies them afterward. This prevents conflicts during deployment.
+
+### Script Disappears After Execution
+
+-   **"deploy-cpanel.sh not found after running"**: The improved deployment script now preserves itself during the cleaning process by explicitly excluding its own name from deletion.
 
 ### MIME Type and Asset Issues
 
@@ -358,4 +369,7 @@ npm run build:cpanel
 git add dist/
 git commit -m "Update built assets"
 git push origin main
+
+# Update deployment script
+# (Automatically handles local changes and preserves itself)
 ```

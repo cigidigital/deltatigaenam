@@ -12,6 +12,13 @@ echo "🚀 Starting cPanel auto-deployment..."
 CURRENT_DIR=$(pwd)
 echo "📍 Working directory: $CURRENT_DIR"
 
+# Store the script name to ensure it's not deleted
+SCRIPT_NAME=$(basename "$0")
+
+# Stash any local changes to avoid conflicts during git pull
+echo "📦 Stashing any local changes..."
+git stash push -m "Auto-stash before deployment $(date)"
+
 # Pull latest changes from Git
 echo "📥 Pulling latest changes from Git..."
 git pull origin main
@@ -30,13 +37,13 @@ if [ -f "index.html" ]; then
     cp -r index.html assets/ .htaccess backup/$(date +%Y%m%d_%H%M%S)/ 2>/dev/null || true
 fi
 
-# Remove all current web files (except .git and dist)
+# Remove all current web files (except .git, dist, backup, and this script)
 echo "🧹 Cleaning current directory..."
-find . -maxdepth 1 ! -name '.' ! -name '..' ! -name '.git' ! -name 'dist' ! -name 'backup' -exec rm -rf {} +
+find . -maxdepth 1 ! -name '.' ! -name '..' ! -name '.git' ! -name 'dist' ! -name 'backup' ! -name "$SCRIPT_NAME" -exec rm -rf {} +
 
 # Copy dist contents to current directory
 echo "📁 Extracting built files from dist..."
-cp -r dist/* .
+cp -r dist/. .
 
 # Remove dist folder (clean up)
 rm -rf dist
@@ -50,6 +57,10 @@ find . -type d -exec chmod 755 {} \;
 if [ -f ".htaccess" ]; then
     chmod 644 .htaccess
 fi
+
+# Apply stashed changes if any (for files that don't conflict)
+echo "🔄 Applying stashed changes (if any)..." 
+git stash pop 2>/dev/null || echo "ℹ️  No stashed changes to apply or conflicts occurred"
 
 echo "✅ Deployment completed successfully!"
 echo "🌐 Your website should now be live at your domain"

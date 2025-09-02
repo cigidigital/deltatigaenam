@@ -2,9 +2,12 @@ RewriteEngine On
 RewriteBase /
 
 # Handle React Router - redirect all requests to index.html
+# This rule must come BEFORE the directory listing prevention rules
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule . /index.html [L]
+
+# Prevent directory listings
+Options -Indexes
 
 # Force correct MIME types (more aggressive approach)
 <IfModule mod_mime.c>
