@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Toaster } from "@/components/ui/sonner";
 import { Toaster as Sonner } from "@/components/ui/sonner";
+import TopBar from "@/components/site/TopBar";
 import Header from "@/components/site/Header";
 import Footer from "@/components/site/Footer";
 import Index from "@/pages/Index";
@@ -49,6 +50,7 @@ const App = () => {
 							<Toaster />
 							<Sonner />
 							<BrowserRouter>
+								<TopBar />
 								<Header />
 								<Routes>
 									<Route path="/" element={<Index />} />

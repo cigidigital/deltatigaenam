@@ -1,5 +1,5 @@
 import { Link, NavLink } from "react-router-dom";
-import { Menu } from "lucide-react";
+import { Menu, Languages } from "lucide-react";
 import { useState } from "react";
 import { useLanguage } from "@/contexts";
 
@@ -12,7 +12,7 @@ const Header = () => {
 	};
 
 	return (
-		<header className="border-b bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
+		<header className="border-b bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-40">
 			<div className="container flex h-16 items-center justify-between">
 				<Link to="/" className="flex items-center gap-2">
 					<img
@@ -79,18 +79,22 @@ const Header = () => {
 					</NavLink>
 					<button
 						onClick={toggleLanguage}
-						className="text-sm text-muted-foreground hover:text-foreground story-link"
+						className="text-sm text-muted-foreground hover:text-foreground story-link flex items-center gap-1.5"
+						title={language === "id" ? "Switch to English" : "Ganti ke Bahasa Indonesia"}
 					>
-						{language === "id" ? "EN" : "ID"}
+						<Languages className="w-4 h-4" />
+						<span>{language === "id" ? "EN" : "ID"}</span>
 					</button>
 				</nav>
 
 				<div className="flex items-center gap-4">
 					<button
 						onClick={toggleLanguage}
-						className="md:hidden text-sm text-muted-foreground hover:text-foreground story-link mr-4"
+						className="md:hidden text-sm text-muted-foreground hover:text-foreground story-link mr-4 flex items-center gap-1.5"
+						title={language === "id" ? "Switch to English" : "Ganti ke Bahasa Indonesia"}
 					>
-						{language === "id" ? "EN" : "ID"}
+						<Languages className="w-4 h-4" />
+						<span>{language === "id" ? "EN" : "ID"}</span>
 					</button>
 					<button
 						className="md:hidden"

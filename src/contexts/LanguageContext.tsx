@@ -156,17 +156,23 @@ const translations = {
 		// FAQ
 		"faq.title": "FAQ",
 
-		// Why Us
-		"whyUs.title": "Mengapa Memilih Kami",
-		"whyUs.description": "Keunggulan yang membuat kami berbeda",
-		"whyUs.legal.title": "Legal & Kredibel",
-		"whyUs.legal.desc": "Kepatuhan dan standar mutu.",
-		"whyUs.instructor.title": "Instruktur Praktisi",
-		"whyUs.instructor.desc": "Berpengalaman di industri.",
-		"whyUs.network.title": "Jaringan Mitra",
-		"whyUs.network.desc": "Kolaborasi lintas sektor.",
-		"whyUs.service.title": "Layanan Lengkap",
-		"whyUs.service.desc": "End-to-end, efisien.",
+		// Why Us (Values)
+		"whyUs.title": "Nilai Kami",
+		"whyUs.description": "Nilai-nilai yang menjadi landasan kami",
+		"whyUs.value1.title": "Dynamic",
+		"whyUs.value1.desc":
+			"Selalu adaptif terhadap perubahan dan inovasi dalam dunia kerja.",
+		"whyUs.value2.title": "Excellence",
+		"whyUs.value2.desc": "Unggul dalam setiap layanan yang diberikan.",
+		"whyUs.value3.title": "Leading",
+		"whyUs.value3.desc":
+			"Pionir dalam pengembangan solusi human capital yang inovatif.",
+		"whyUs.value4.title": "Transcendent",
+		"whyUs.value4.desc":
+			"Melampaui ekspektasi klien dan memberikan nilai tambah yang berkelanjutan.",
+		"whyUs.value5.title": "Action",
+		"whyUs.value5.desc":
+			"Berorientasi pada hasil dan tindakan nyata untuk mencapai tujuan.",
 
 		// CSChat
 		"cschat.button": "Hubungi Kami",
@@ -325,17 +331,19 @@ const translations = {
 		// FAQ
 		"faq.title": "FAQ",
 
-		// Why Us
-		"whyUs.title": "Why Choose Us",
-		"whyUs.description": "Advantages that make us different",
-		"whyUs.legal.title": "Legal & Credible",
-		"whyUs.legal.desc": "Compliance and quality standards.",
-		"whyUs.instructor.title": "Practitioner Instructors",
-		"whyUs.instructor.desc": "Experienced in the industry.",
-		"whyUs.network.title": "Partner Network",
-		"whyUs.network.desc": "Cross-sector collaboration.",
-		"whyUs.service.title": "Complete Services",
-		"whyUs.service.desc": "End-to-end, efficient.",
+		// Why Us (Values)
+		"whyUs.title": "Our Values",
+		"whyUs.description": "The values that form our foundation",
+		"whyUs.value1.title": "Dynamic",
+		"whyUs.value1.desc": "Always adaptive to changes and innovations in the workplace.",
+		"whyUs.value2.title": "Excellence",
+		"whyUs.value2.desc": "Excel in every service provided.",
+		"whyUs.value3.title": "Leading",
+		"whyUs.value3.desc": "Pioneer in developing innovative human capital solutions.",
+		"whyUs.value4.title": "Transcendent",
+		"whyUs.value4.desc": "Exceeding client expectations and delivering sustainable added value.",
+		"whyUs.value5.title": "Action",
+		"whyUs.value5.desc": "Results-oriented and concrete action to achieve goals.",
 
 		// CSChat
 		"cschat.button": "Contact Us",

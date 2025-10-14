@@ -75,69 +75,6 @@ const Index = () => {
 
 			<Services />
 
-			{/* Alur Layanan (compact stepper) */}
-			<section className="py-10 border-t">
-				<div className="container">
-					<h2 className="text-xl font-semibold mb-6 text-center">
-						{t("workflow.title")}
-					</h2>
-					<ol className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-3 md:gap-4">
-						{[
-							{
-								n: 1,
-								t: t("workflow.step1.title"),
-								d: t("workflow.step1.desc"),
-							},
-							{
-								n: 2,
-								t: t("workflow.step2.title"),
-								d: t("workflow.step2.desc"),
-							},
-							{
-								n: 3,
-								t: t("workflow.step3.title"),
-								d: t("workflow.step3.desc"),
-							},
-							{
-								n: 4,
-								t: t("workflow.step4.title"),
-								d: t("workflow.step4.desc"),
-							},
-							{
-								n: 5,
-								t: t("workflow.step5.title"),
-								d: t("workflow.step5.desc"),
-							},
-						].map((s) => (
-							<li
-								key={s.n}
-								className="relative p-3 rounded-lg border bg-card animate-fade-in"
-								style={{ animationDelay: `${s.n * 0.1}s` }}
-							>
-								<div className="flex items-center gap-3">
-									<span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-primary text-primary-foreground text-xs font-semibold">
-										{s.n}
-									</span>
-									<div className="min-w-0">
-										<div className="text-sm font-medium truncate">
-											{s.t}
-										</div>
-										<div className="hidden sm:block text-xs text-muted-foreground truncate">
-											{s.d}
-										</div>
-									</div>
-									{s.n < 5 && (
-										<div className="hidden md:flex items-center ml-auto">
-											<div className="w-10 h-0.5 bg-border" />
-										</div>
-									)}
-								</div>
-							</li>
-						))}
-					</ol>
-				</div>
-			</section>
-
 			<Testimonials />
 
 			<FAQSection />

@@ -51,49 +51,12 @@ const About = () => {
 							</ul>
 						</div>
 					</div>
-
-					<div className="space-y-4">
-						<h3 className="text-2xl font-semibold">
-							{t("about.values")}
-						</h3>
-						<div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-							{[
-								{
-									title: t("about.value1.title"),
-									desc: t("about.value1.desc"),
-								},
-								{
-									title: t("about.value2.title"),
-									desc: t("about.value2.desc"),
-								},
-								{
-									title: t("about.value3.title"),
-									desc: t("about.value3.desc"),
-								},
-							].map((v) => (
-								<div
-									key={v.title}
-									className="p-4 rounded-lg border bg-card"
-								>
-									<div className="flex items-start gap-2 mb-1">
-										<CheckCircle className="text-primary mt-0.5 shrink-0" />
-										<h4 className="font-semibold">
-											{v.title}
-										</h4>
-									</div>
-									<p className="text-sm text-muted-foreground leading-relaxed">
-										{v.desc}
-									</p>
-								</div>
-							))}
-						</div>
-					</div>
 				</div>
 
 				<div className="order-1 md:order-2 max-w-xl w-full mx-auto md:mx-0">
 					<AspectRatio ratio={16 / 9}>
 						<img
-							src="/about.png"
+							src="/about.webp"
 							alt={
 								language === "id"
 									? "Kegiatan pelatihan dan sertifikasi PT Delta Tiga Enam"

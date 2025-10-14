@@ -1,26 +1,36 @@
-import { ShieldCheck, Award, Users, CheckCircle } from "lucide-react";
+import { Zap, Award, TrendingUp, Sparkles, Target } from "lucide-react";
 import { useLanguage } from "@/contexts";
 
 const items = [
 	{
-		icon: ShieldCheck,
-		titleKey: "whyUs.legal.title",
-		descKey: "whyUs.legal.desc",
+		icon: Zap,
+		titleKey: "whyUs.value1.title",
+		descKey: "whyUs.value1.desc",
+		letter: "D",
 	},
 	{
 		icon: Award,
-		titleKey: "whyUs.instructor.title",
-		descKey: "whyUs.instructor.desc",
+		titleKey: "whyUs.value2.title",
+		descKey: "whyUs.value2.desc",
+		letter: "E",
 	},
 	{
-		icon: Users,
-		titleKey: "whyUs.network.title",
-		descKey: "whyUs.network.desc",
+		icon: TrendingUp,
+		titleKey: "whyUs.value3.title",
+		descKey: "whyUs.value3.desc",
+		letter: "L",
 	},
 	{
-		icon: CheckCircle,
-		titleKey: "whyUs.service.title",
-		descKey: "whyUs.service.desc",
+		icon: Sparkles,
+		titleKey: "whyUs.value4.title",
+		descKey: "whyUs.value4.desc",
+		letter: "T",
+	},
+	{
+		icon: Target,
+		titleKey: "whyUs.value5.title",
+		descKey: "whyUs.value5.desc",
+		letter: "A",
 	},
 ];
 
@@ -38,8 +48,8 @@ const WhyUs = () => {
 						{t("whyUs.description")}
 					</p>
 				</header>
-				<div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-					{items.map(({ icon: Icon, titleKey, descKey }) => (
+				<div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-6">
+					{items.map(({ icon: Icon, titleKey, descKey, letter }) => (
 						<article
 							key={titleKey}
 							className="rounded-xl border bg-gradient-to-br from-card to-card/70 p-6 shadow-sm text-center transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
