@@ -8,6 +8,7 @@ import Hero from "@/components/sections/Hero";
 import About from "@/components/sections/About";
 import Services from "@/components/sections/Services";
 import WhyUs from "@/components/sections/WhyUs";
+import InstagramEmbed from "@/components/sections/InstagramEmbed";
 import Testimonials from "@/components/sections/Testimonials";
 import FAQSection from "@/components/sections/FAQ";
 import { useLanguage } from "@/contexts";
@@ -75,6 +76,8 @@ const Index = () => {
 
 			<Services />
 
+			<InstagramEmbed />
+
 			<Testimonials />
 
 			<FAQSection />
@@ -100,9 +103,8 @@ const Index = () => {
 										key={a.id}
 										className="mb-6 last:mb-0 relative animate-fade-in"
 										style={{
-											animationDelay: `${
-												index * 0.2 + 0.3
-											}s`,
+											animationDelay: `${index * 0.2 + 0.3
+												}s`,
 										}}
 									>
 										<span className="absolute -left-2 md:-left-2.5 top-2 w-3 h-3 md:w-3.5 md:h-3.5 rounded-full bg-primary border-2 border-background shadow" />
