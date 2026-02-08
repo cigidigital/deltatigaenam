@@ -37,12 +37,18 @@ const Testimonials = () => {
 							</p>
 							<div className="mt-4 flex items-center gap-3">
 								<div
-									className={`w-12 h-12 rounded-full flex items-center justify-center ${testimonial.gender === "male"
-											? "bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400"
-											: "bg-pink-100 text-pink-600 dark:bg-pink-900/30 dark:text-pink-400"
+									className={`w-12 h-12 rounded-full flex items-center justify-center overflow-hidden ${testimonial.gender === "male"
+										? "bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400"
+										: "bg-pink-100 text-pink-600 dark:bg-pink-900/30 dark:text-pink-400"
 										}`}
 								>
-									{testimonial.gender === "male" ? (
+									{testimonial.image ? (
+										<img
+											src={testimonial.image}
+											alt={testimonial.name}
+											className="w-full h-full object-cover"
+										/>
+									) : testimonial.gender === "male" ? (
 										<User size={24} strokeWidth={2} />
 									) : (
 										<UserRound size={24} strokeWidth={2} />
